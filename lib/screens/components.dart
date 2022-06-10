@@ -26,3 +26,9 @@ customButton(String text,Function method){
     child:  Text(text),
     );
 }
+
+customSnackBar(var text,BuildContext context){
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(text))
+    );
+}
