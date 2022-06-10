@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iotapp/screens/home.dart';
+import 'package:iotapp/screens/signup.dart';
 import 'firebase_options.dart';
 
 
@@ -19,8 +20,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
+      initialRoute: '/signup',
       routes: {
-        '/':(context) => const Home()
+        '/':(context) => const Home(),
+        '/signup':(context)=>  SignUp()
       },
     );
   }
