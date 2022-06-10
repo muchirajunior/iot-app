@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
         title: const Text("Home page"),
         actions: [
           Center(child: Text(FirebaseAuth.instance.currentUser!.email.toString()))
+
         ],
       ),
 
@@ -27,7 +28,8 @@ class _HomeState extends State<Home> {
         stream: FirebaseFirestore.instance.collection("projects").where("owner",isEqualTo: FirebaseAuth.instance.currentUser!.email.toString()).snapshots(),
         builder: ((context, snapshot){
           if (snapshot.hasData){
-            return ListView.builder(
+            if (snapshot.data!.docs.isNotEmpty){
+              return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index){
                 DocumentSnapshot documentSnapshot=snapshot.data!.docs[index];
@@ -36,11 +38,15 @@ class _HomeState extends State<Home> {
                   trailing: IconButton(
                     onPressed: (){},
                     icon: const Icon(Icons.delete)),
+                  onTap: ()=>Navigator.pushNamed(context, '/project',arguments: {"name":documentSnapshot['name'], "id":documentSnapshot.id}),                    
                 ),);
               });
-          }else{
+            }else{
             return const Center(child:Text("You have No project \n click on the add button to create one"));
+          }}else{
+            return const Center(child: CircularProgressIndicator(),);
           }
+          
         }),
       ),
       floatingActionButton: FloatingActionButton(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iotapp/screens/create.dart';
 import 'package:iotapp/screens/home.dart';
+import 'package:iotapp/screens/project.dart';
 import 'package:iotapp/screens/signup.dart';
 import 'firebase_options.dart';
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'IoT app',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context) => const Home(),
         '/signup':(context)=>  SignUp(),
-        '/create':(context)=> Create()
+        '/create':(context)=> Create(),
+        '/project':(context)=> Project()
       },
     );
   }
