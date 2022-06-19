@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:iotapp/screens/components.dart';
 
 class Project extends StatefulWidget {
   Project({Key? key}) : super(key: key);
@@ -25,7 +27,13 @@ class _ProjectState extends State<Project> {
       appBar: AppBar(
         title: Text(data['name']),
         actions: [
-          IconButton(onPressed: (){},
+          IconButton(onPressed: (){
+            FirebaseFirestore.instance.collection('projects').doc(data['id']).get().then((value) => 
+              Clipboard.setData(ClipboardData(text: value.data().toString() ))
+            );
+            customSnackBar("copied to clipboard, share to developer via email", context);
+
+          },
            icon: const Icon(Icons.share))
         ],
       ),
@@ -38,9 +46,10 @@ class _ProjectState extends State<Project> {
             children: pins.map((pin) => Card(
               child: ListTile(
                 title: Text( snapshot.data!.get("${pin}Name"),),
-                trailing: ElevatedButton(
+                trailing: pins.indexOf(pin)<6 ? ElevatedButton(
                   onPressed: ()=>update(snapshot.data!.id, pin,snapshot.data!.get(pin) ),
-                  child:Text(snapshot.data!.get(pin)) ),
+                  child:Text(snapshot.data!.get(pin)) ) : 
+                  CircleAvatar(child: Text(snapshot.data!.get(pin)),),
         
               ),
             )).toList()

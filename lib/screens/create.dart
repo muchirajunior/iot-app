@@ -12,7 +12,7 @@ class Create extends StatefulWidget {
 
 class _CreateState extends State<Create> {
   var projectName=TextEditingController();
-  var pin0Name=TextEditingController(text: "Item 9");
+  var pin0Name=TextEditingController(text: "Item ");
   var pin1Name=TextEditingController(text: "Item 1");
   var pin2Name=TextEditingController(text: "Item 2");
   var pin3Name=TextEditingController(text: "Item 3");
@@ -32,6 +32,11 @@ class _CreateState extends State<Create> {
    
  }
 
+  heading(name)=> Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children:  <Widget>[
+            Text(name)
+          ],);
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +49,18 @@ class _CreateState extends State<Create> {
         padding:const EdgeInsets.all(10),
         children: [
           customTextInput(projectName, "project name", false),
+          heading("CONTROL PINS"),
+          customTextInput(pin0Name, "", false),
           customTextInput(pin1Name, "", false),
           customTextInput(pin2Name, "", false),
           customTextInput(pin3Name, "", false),
           customTextInput(pin4Name, "", false),
           customTextInput(pin5Name, "", false),
+          heading("SENSOR PINS"),
           customTextInput(pin6Name, "", false),
           customTextInput(pin7Name, "", false),
           customTextInput(pin8Name, "", false),
-          customTextInput(pin0Name, "", false),
+          
           const SizedBox(height: 20,),
           ElevatedButton(
             onPressed: submit,
