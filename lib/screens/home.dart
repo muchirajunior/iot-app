@@ -19,7 +19,15 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text("Home page"),
         actions: [
-          Center(child: Text(FirebaseAuth.instance.currentUser!.email.toString()))
+          Center(child: Row(
+            children: [
+              Text(FirebaseAuth.instance.currentUser!.email.toString().split("@").first),
+              IconButton(onPressed: (){
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(context, "/signup");
+              }, icon: const Icon(Icons.person_remove))
+            ],
+          ))
 
         ],
       ),
@@ -36,7 +44,7 @@ class _HomeState extends State<Home> {
                 return Card(child: ListTile(
                   title: Text(documentSnapshot['name']),
                   trailing: IconButton(
-                    onPressed: (){},
+                    onPressed: ()=>deleteDialog(context, documentSnapshot.id, documentSnapshot['name']),
                     icon: const Icon(Icons.delete)),
                   onTap: ()=>Navigator.pushNamed(context, '/project',arguments: {"name":documentSnapshot['name'], "id":documentSnapshot.id}),                    
                 ),);

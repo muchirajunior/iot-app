@@ -12,23 +12,28 @@ class Create extends StatefulWidget {
 
 class _CreateState extends State<Create> {
   var projectName=TextEditingController();
-  var pin0Name=TextEditingController(text: "Item ");
-  var pin1Name=TextEditingController(text: "Item 1");
-  var pin2Name=TextEditingController(text: "Item 2");
-  var pin3Name=TextEditingController(text: "Item 3");
-  var pin4Name=TextEditingController(text: "Item 4");
-  var pin5Name=TextEditingController(text: "Item 5");
-  var pin6Name=TextEditingController(text: "Item 6");
-  var pin7Name=TextEditingController(text: "Item 7");
-  var pin8Name=TextEditingController(text: "Item 8");
+  var pin0Name=TextEditingController(text: "Item 1");
+  var pin1Name=TextEditingController(text: "Item 2");
+  var pin2Name=TextEditingController(text: "Item 3");
+  var pin3Name=TextEditingController(text: "Item 4");
+  var pin4Name=TextEditingController(text: "Item 5");
+  var pin5Name=TextEditingController(text: "Item 6");
+  var pin6Name=TextEditingController(text: "sensor 1");
+  var pin7Name=TextEditingController(text: "sensor 2");
+  var pin8Name=TextEditingController(text: "sensor 3");
+
+  bool loading=false;
 
  submit(){
+    loading=true;
+   setState(() {});
    CollectionReference reference=FirebaseFirestore.instance.collection("projects");
    var data=sampleProject(projectName.text, pin0Name.text, pin1Name.text, pin2Name.text, pin3Name.text, pin4Name.text, pin5Name.text, pin6Name.text, pin7Name.text, pin8Name.text);
    reference.add(data).whenComplete(() => {
      customSnackBar("project created successfully", context),
      Navigator.pop(context)
    });
+   loading=false;
    
  }
 
@@ -62,7 +67,7 @@ class _CreateState extends State<Create> {
           customTextInput(pin8Name, "", false),
           
           const SizedBox(height: 20,),
-          ElevatedButton(
+         loading ? const Center(child: CircularProgressIndicator(),) : ElevatedButton(
             onPressed: submit,
              child: const Text("Create Project"))
         ],
