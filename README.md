@@ -18,12 +18,12 @@ This is a mobile app developed using Flutter Dart hybrid framework that user Fir
 To run the application as web or on mobile device use the following commands:
 - To install the depedencies :electric_plug:
 ```
-$ flutter pub get 
+flutter pub get 
 ```
 
 - To run  :star:
 ```
-$ flutter run
+flutter run
 ```
 
 ### NodeMCU part :nut_and_bolt:
@@ -213,7 +213,7 @@ void updatePins(String payload){
   
 }
 ```
-copy this and modify the project_id fiels and put the shared id from the user. :gear:
+copy this and modify the project_id variable and put the shared project id from the user. :gear:
 Also connect the items and sensors as per the pinout :tada:
 
 ### contributers 	:technologist:
