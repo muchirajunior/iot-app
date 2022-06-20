@@ -24,12 +24,13 @@ class _CreateState extends State<Create> {
 
   bool loading=false;
 
- submit(){
+ submit()async{
     loading=true;
    setState(() {});
    CollectionReference reference=FirebaseFirestore.instance.collection("projects");
    var data=sampleProject(projectName.text, pin0Name.text, pin1Name.text, pin2Name.text, pin3Name.text, pin4Name.text, pin5Name.text, pin6Name.text, pin7Name.text, pin8Name.text);
-   reference.add(data).whenComplete(() => {
+   await Future.delayed(const Duration(seconds: 7));
+   reference.add(data).whenComplete(() =>{
      customSnackBar("project created successfully", context),
      Navigator.pop(context)
    });
@@ -50,7 +51,24 @@ class _CreateState extends State<Create> {
         title: const Text("Create New Project"),
       ),
 
-      body: ListView(
+      body: loading ? Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:  <Widget>[
+            SizedBox(
+              width: MediaQuery.of(context).size.width*.5,
+              height: MediaQuery.of(context).size.width*.5,
+              child: const CircularProgressIndicator( strokeWidth: 10,)),
+
+              const SizedBox(height: 50,),
+              const Text("Please Wait as we configure your project.......")
+
+          ]
+        ),
+      ):
+      
+      
+       ListView(
         padding:const EdgeInsets.all(10),
         children: [
           customTextInput(projectName, "project name", false),
@@ -67,7 +85,7 @@ class _CreateState extends State<Create> {
           customTextInput(pin8Name, "", false),
           
           const SizedBox(height: 20,),
-         loading ? const Center(child: CircularProgressIndicator(),) : ElevatedButton(
+       ElevatedButton(
             onPressed: submit,
              child: const Text("Create Project"))
         ],

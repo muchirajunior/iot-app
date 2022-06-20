@@ -26,6 +26,7 @@ class _ProjectState extends State<Project> {
     return Scaffold(
       appBar: AppBar(
         title: Text(data['name']),
+        bottom: PreferredSize(child: Text("control it from anywhere"), preferredSize: Size(double.infinity, 30),),
         actions: [
           IconButton(onPressed: (){
             FirebaseFirestore.instance.collection('projects').doc(data['id']).get().then((value) => 
@@ -49,7 +50,9 @@ class _ProjectState extends State<Project> {
                 trailing: pins.indexOf(pin)<6 ? ElevatedButton(
                   onPressed: ()=>update(snapshot.data!.id, pin,snapshot.data!.get(pin) ),
                   child:Text(snapshot.data!.get(pin)) ) : 
-                  CircleAvatar(child: Text(snapshot.data!.get(pin)),),
+                  CircleAvatar(
+                    radius: 30,
+                    child: Text(snapshot.data!.get(pin), overflow: TextOverflow.ellipsis,),),
         
               ),
             )).toList()
