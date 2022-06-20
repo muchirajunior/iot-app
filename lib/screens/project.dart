@@ -26,11 +26,14 @@ class _ProjectState extends State<Project> {
     return Scaffold(
       appBar: AppBar(
         title: Text(data['name']),
-        bottom: PreferredSize(child: Text("control it from anywhere"), preferredSize: Size(double.infinity, 30),),
+        bottom: const PreferredSize(preferredSize: Size(double.infinity, 30),child: Text("control it from anywhere"), ),
         actions: [
           IconButton(onPressed: (){
-            FirebaseFirestore.instance.collection('projects').doc(data['id']).get().then((value) => 
-              Clipboard.setData(ClipboardData(text: value.data().toString() ))
+            Map<String, dynamic>? info;
+            FirebaseFirestore.instance.collection('projects').doc(data['id']).get().then((value) => {
+              info=value.data(),
+              info!['project_id']=data['id'],
+              Clipboard.setData(ClipboardData(text: info.toString() ))}
             );
             customSnackBar("copied to clipboard, share to developer via email", context);
 
@@ -51,8 +54,8 @@ class _ProjectState extends State<Project> {
                   onPressed: ()=>update(snapshot.data!.id, pin,snapshot.data!.get(pin) ),
                   child:Text(snapshot.data!.get(pin)) ) : 
                   CircleAvatar(
-                    radius: 30,
-                    child: Text(snapshot.data!.get(pin), overflow: TextOverflow.ellipsis,),),
+                    radius: 35,
+                    child: Text(snapshot.data!.get(pin), overflow: TextOverflow.ellipsis, maxLines: 1,),),
         
               ),
             )).toList()

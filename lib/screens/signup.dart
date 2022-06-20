@@ -11,24 +11,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  var text='login';
-  bool loading = false;
-  align(){
-    setState(() {
-      text=text=='login' ? "register" :"login";
-    });
-  }
-
-  var email=TextEditingController();
-  var password=TextEditingController();
-  var confirmPassword=TextEditingController();
-
-  signUp()async{
-    loading=true;
-    setState(() {});
-  }
-
-
+  
   @override
   Widget build(BuildContext context) {
 
