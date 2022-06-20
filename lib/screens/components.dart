@@ -37,7 +37,7 @@ customSnackBar(var text,BuildContext context){
 deleteDialog(BuildContext context, String id,String projectName){
   return  showDialog(context: context, builder: (context){
     return AlertDialog(
-      title: Text("warning"),
+      title:const  Text("warning"),
       content: Text("project $projectName will be deleted and this action cannot be reversed !"),
       actions: [
         IconButton(onPressed: (){ 
