@@ -62,7 +62,7 @@ DHT dht(12, DHTTYPE);
 String project_id= "PROJECT_ID"; //put your project id from user
 
 /* 2. Define the API Key */
-#define API_KEY "AIzaSyCtlZTb2k02uviGdvOqb7-I4Hq4mTat_0A"
+#define API_KEY "AIzaSyCtlZTb2k02uviGdvOqb7"
 
 /* 3. Define the project ID */
 #define FIREBASE_PROJECT_ID "iot-app-6a68f"
