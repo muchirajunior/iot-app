@@ -1,10 +1,10 @@
-# iotapp
+# IOTAPP
 
-This is a research project tha aims at improving the userbality of Internet of Things software as a servive platforms.
+This is a research project tha aims at improving the usability of Internet of Things software as a servive platforms.
 The project uses flutter mobile application with firebase backend as a service to sync data with nodemcu IoT board 
 This project has two parts:
-- the mobile app
-- the nodemcu part
+- The mobile app
+- The nodemcu part
 
 ### Application part :iphone:
 This is a mobile app developed using Flutter Dart hybrid framework that user Firebase to:
@@ -16,7 +16,7 @@ This is a mobile app developed using Flutter Dart hybrid framework that user Fir
 - signout a user.
 
 To run the application as web or on mobile device use the following commands:
-- To install the depedencies :electric_plug:
+- To install the dependencies :electric_plug:
 ```
 flutter pub get 
 ```
@@ -49,13 +49,13 @@ Here is a sample code with dht sensor that sends humidity and temperature values
 #define DHTTYPE DHT11 
 
 /* 1. Define the WiFi credentials */
-#define WIFI_SSID "MUCHIRA JUNIOR"
-#define WIFI_PASSWORD "JUNIOR12"
+#define WIFI_SSID "WIFI_NAME"
+#define WIFI_PASSWORD "PASSWORD"
 
 
 DHT dht(12, DHTTYPE);
 
-String project_id= "VKfVTs8mmO5P9scHcr2x"; //put your project id from user
+String project_id= "PROJECT_ID"; //put your project id from user
 
 /* 2. Define the API Key */
 #define API_KEY "AIzaSyCtlZTb2k02uviGdvOqb7-I4Hq4mTat_0A"
@@ -214,6 +214,7 @@ void updatePins(String payload){
 }
 ```
 copy this and modify the project_id variable and put the shared project id from the user. :gear:
+Add correct wifi ssid and password for the installation router :hammer_and_wrench:
 Also connect the items and sensors as per the pinout :tada:
 
 ### contributers 	:technologist:
