@@ -29,7 +29,7 @@ class _CreateState extends State<Create> {
    setState(() {});
    CollectionReference reference=FirebaseFirestore.instance.collection("projects");
    var data=sampleProject(projectName.text, pin0Name.text, pin1Name.text, pin2Name.text, pin3Name.text, pin4Name.text, pin5Name.text, pin6Name.text, pin7Name.text, pin8Name.text);
-   await Future.delayed(const Duration(seconds: 7));
+   await Future.delayed(const Duration(seconds: 4));
    reference.add(data).whenComplete(() =>{
      customSnackBar("project created successfully", context),
      Navigator.pop(context)

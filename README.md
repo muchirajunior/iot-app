@@ -33,6 +33,7 @@ The control pins remain the same except if the actuator used needs more control 
 Here is a sample code with dht sensor that sends humidity and temperature values to a user smart home project.
 
 ```C++
+//this example uses a dht sensor and updates humidity and the temperature sensor reading
 #if defined(ESP32)
 #include <WiFi.h>
 #elif defined(ESP8266)
@@ -44,16 +45,19 @@ Here is a sample code with dht sensor that sends humidity and temperature values
 
 // Provide the token generation process info.
 #include <addons/TokenHelper.h>
-#include "DHT.h"
 
+
+//if not using DHT sensor remove these 3 example lines
+#include "DHT.h"
 #define DHTTYPE DHT11 
+DHT dht(12, DHTTYPE);
+
 
 /* 1. Define the WiFi credentials */
 #define WIFI_SSID "WIFI_NAME"
 #define WIFI_PASSWORD "PASSWORD"
 
 
-DHT dht(12, DHTTYPE);
 
 String project_id= "PROJECT_ID"; //put your project id from user
 
@@ -98,7 +102,8 @@ void setup()
     pinMode(led3,OUTPUT);
     pinMode(led4,OUTPUT);
     pinMode(led5,OUTPUT);
-     dht.begin();
+
+    dht.begin();//if not using dht sensor remove this line
 
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.print("Connecting to Wi-Fi");
@@ -157,7 +162,7 @@ void loop()
         else
             Serial.println(fbdo.errorReason());
         
-        
+        //remove these two lines and add your sensors code
         float t = dht.readTemperature();
         float h = dht.readHumidity();
 
